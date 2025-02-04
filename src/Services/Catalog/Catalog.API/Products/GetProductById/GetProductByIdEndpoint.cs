@@ -1,6 +1,4 @@
-﻿using Catalog.API.Products.GetProducts;
-
-namespace Catalog.API.Products.GetProductById
+﻿namespace Catalog.API.Products.GetProductById
 {
     //public record GetProductByIdRequest();
 
@@ -11,9 +9,9 @@ namespace Catalog.API.Products.GetProductById
         {
             app.MapGet("/products/{id}", async (Guid id, ISender sender) =>
             {
-                var result = sender.Send(new GetProductByIdQuery(id));
+                var result =await sender.Send(new GetProductByIdQuery(id));
 
-                var response = new GetProductByIdResponse(result.Result.Product);
+                var response = new GetProductByIdResponse(result.Product);
 
                 return Results.Ok(response);
             })
